@@ -34,6 +34,46 @@ export default function Step1PersonalInfo() {
           onChange={(e) => update({ personal: { ...data.personal, email: e.target.value } })}
         />
       </div>
+
+      <div className="space-y-1">
+        <label className="text-sm font-medium text-gray-700">Phone</label>
+        <input
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          placeholder="+1 234 567 890"
+          value={data.personal.phone}
+          onChange={(e) => update({ personal: { ...data.personal, phone: e.target.value } })}
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-sm font-medium text-gray-700">Location</label>
+        <input
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          placeholder="City, Country"
+          value={data.personal.location}
+          onChange={(e) => update({ personal: { ...data.personal, location: e.target.value } })}
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-sm font-medium text-gray-700">Website</label>
+        <input
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          placeholder="https://yourportfolio.com"
+          value={data.personal.website ?? ""}
+          onChange={(e) => update({ personal: { ...data.personal, website: e.target.value } })}
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-sm font-medium text-gray-700">LinkedIn</label>
+        <input
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          placeholder="https://linkedin.com/in/username"
+          value={data.personal.linkedin ?? ""}
+          onChange={(e) => update({ personal: { ...data.personal, linkedin: e.target.value } })}
+        />
+      </div>
     </form>
   );
 }

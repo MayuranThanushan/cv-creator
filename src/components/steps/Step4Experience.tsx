@@ -5,9 +5,10 @@ export default function Step4Experience() {
 
   const add = () => {
     update({
-      experience: [...data.experience, {
-        role: "", company: "", period: "", points: []
-      }]
+      experience: [
+        ...data.experience,
+        { role: "", company: "", start: "", end: "", location: "", points: [] }
+      ]
     });
   };
 
@@ -37,11 +38,31 @@ export default function Step4Experience() {
           />
           <input
             className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Period"
-            value={e.period}
+            placeholder="Start (e.g. 07/2022)"
+            value={e.start ?? ""}
             onChange={(ev) => {
               const ex = [...data.experience];
-              ex[i].period = ev.target.value;
+              ex[i].start = ev.target.value;
+              update({ experience: ex });
+            }}
+          />
+          <input
+            className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="End (e.g. Present)"
+            value={e.end ?? ""}
+            onChange={(ev) => {
+              const ex = [...data.experience];
+              ex[i].end = ev.target.value;
+              update({ experience: ex });
+            }}
+          />
+          <input
+            className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Location"
+            value={e.location ?? ""}
+            onChange={(ev) => {
+              const ex = [...data.experience];
+              ex[i].location = ev.target.value;
               update({ experience: ex });
             }}
           />

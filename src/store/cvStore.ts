@@ -7,17 +7,23 @@ export interface Store {
   next: () => void;
   prev: () => void;
   update: (data: Partial<CVData>) => void;
-  toggleATS: () => void;
 }
 
 const initialData: CVData = {
-  personal: { name: "", title: "", email: "", phone: "", location: "" },
+  personal: {
+    name: "",
+    title: "",
+    email: "",
+    phone: "",
+    location: "",
+    website: "",
+    linkedin: "",
+  },
   summary: "",
   education: [],
   experience: [],
   skills: [],
-  template: "classic",
-  atsMode: false
+  certifications: [],
 };
 
 const storeCreator: StateCreator<Store> = (set) => ({
@@ -28,11 +34,6 @@ const storeCreator: StateCreator<Store> = (set) => ({
   prev: () => set((s) => ({ step: s.step - 1 })),
 
   update: (data) => set((s) => ({ data: { ...s.data, ...data } })),
-
-  toggleATS: () =>
-    set((s) => ({
-      data: { ...s.data, atsMode: !s.data.atsMode }
-    }))
 });
 
 export const useCVStore = create<Store>(storeCreator);

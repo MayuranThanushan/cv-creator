@@ -17,6 +17,15 @@ export const exportPDF = async (data: CVData) => {
       <Page size="A4" style={styles.page}>
         <Text style={styles.name}>{data.personal.name}</Text>
         <Text style={styles.title}>{data.personal.title}</Text>
+        {/* Contact */}
+        <Text style={styles.paragraph}>
+          {[data.personal.location, data.personal.phone, data.personal.email].filter(Boolean).join(' • ')}
+        </Text>
+        { (data.personal.website || data.personal.linkedin) && (
+          <Text style={styles.paragraph}>
+            {[data.personal.website, data.personal.linkedin].filter(Boolean).join(' • ')}
+          </Text>
+        )}
 
         {data.summary && (
           <View>
@@ -30,11 +39,13 @@ export const exportPDF = async (data: CVData) => {
           <View>
             <Text style={styles.sectionTitle}>Education</Text>
             <View style={styles.rule} />
-            {data.education.map((ed, i) => (
-              <Text key={i} style={styles.paragraph}>
-                {ed.degree} - {ed.institute} ({ed.year})
-              </Text>
-            ))}
+            {data.education.map((ed, i) => {
+              const range = [ed.start ?? '', ed.end ?? ''].filter(Boolean).join(' - ');
+              const line = `${ed.degree} - ${ed.institute}${range ? ` (${range})` : ''}`;
+              return (
+                <Text key={i} style={styles.paragraph}>{line}</Text>
+              );
+            })}
           </View>
         )}
 
@@ -45,7 +56,7 @@ export const exportPDF = async (data: CVData) => {
             {data.experience.map((ex, i) => (
               <View key={i}>
                 <Text style={styles.paragraph}>
-                  {ex.role} - {ex.company} ({ex.period})
+                  {ex.role} - {ex.company}{[ex.start ?? '', ex.end ?? ''].filter(Boolean).length ? ` (${[ex.start ?? '', ex.end ?? ''].filter(Boolean).join(' - ')})` : ''}
                 </Text>
                 {ex.points?.map((p, j) => (
                   <Text key={j} style={styles.listItem}>• {p}</Text>
@@ -60,6 +71,16 @@ export const exportPDF = async (data: CVData) => {
             <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.rule} />
             <Text style={styles.paragraph}>{data.skills.join(', ')}</Text>
+          </View>
+        )}
+
+        {data.certifications && data.certifications.length > 0 && (
+          <View>
+            <Text style={styles.sectionTitle}>Certifications</Text>
+            <View style={styles.rule} />
+            {data.certifications.map((c, i) => (
+              <Text key={i} style={styles.listItem}>• {c}</Text>
+            ))}
           </View>
         )}
       </Page>

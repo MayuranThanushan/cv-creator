@@ -7,7 +7,20 @@ export default function ModernTemplate({ data }: any) {
           <span className="text-sm text-gray-500">{data.personal.title}</span>
         </div>
         <div className="h-px bg-gray-200" />
-        {data.summary && <p className="text-gray-700 leading-relaxed">{data.summary}</p>}
+        {/* Contact line */}
+        <p className="text-sm text-gray-600">
+          {[data.personal.location, data.personal.phone, data.personal.email]
+            .filter(Boolean)
+            .join(" • ")}
+        </p>
+        {(data.personal.website || data.personal.linkedin) && (
+          <p className="text-sm text-gray-600">
+            {[data.personal.website, data.personal.linkedin].filter(Boolean).join(" • ")}
+          </p>
+        )}
+        {data.summary && (
+          <p className="text-gray-700 leading-relaxed">{data.summary}</p>
+        )}
       </section>
 
       {data.experience?.length > 0 && (
@@ -50,6 +63,17 @@ export default function ModernTemplate({ data }: any) {
         <section className="space-y-2">
           <h4 className="text-xs uppercase tracking-wide text-gray-500">Skills</h4>
           <p className="text-gray-700">{data.skills.join(', ')}</p>
+        </section>
+      )}
+
+      {data.certifications?.length > 0 && (
+        <section className="space-y-2">
+          <h4 className="text-xs uppercase tracking-wide text-gray-500">Certifications</h4>
+          <ul className="space-y-1 text-gray-700 list-disc ml-5">
+            {data.certifications.map((c: string, i: number) => (
+              <li key={i}>{c}</li>
+            ))}
+          </ul>
         </section>
       )}
     </article>

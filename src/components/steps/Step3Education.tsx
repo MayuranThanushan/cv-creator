@@ -5,7 +5,10 @@ export default function Step3Education() {
 
   const add = () => {
     update({
-      education: [...data.education, { institute: "", degree: "", year: "" }]
+      education: [
+        ...data.education,
+        { institute: "", degree: "", start: "", end: "", location: "", gpa: "" }
+      ]
     });
   };
 
@@ -35,11 +38,41 @@ export default function Step3Education() {
           />
           <input
             className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Year"
-            value={e.year}
+            placeholder="Start (e.g. 09/2020)"
+            value={e.start ?? ""}
             onChange={(ev) => {
               const ed = [...data.education];
-              ed[i].year = ev.target.value;
+              ed[i].start = ev.target.value;
+              update({ education: ed });
+            }}
+          />
+          <input
+            className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="End (e.g. 06/2024)"
+            value={e.end ?? ""}
+            onChange={(ev) => {
+              const ed = [...data.education];
+              ed[i].end = ev.target.value;
+              update({ education: ed });
+            }}
+          />
+          <input
+            className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Location"
+            value={e.location ?? ""}
+            onChange={(ev) => {
+              const ed = [...data.education];
+              ed[i].location = ev.target.value;
+              update({ education: ed });
+            }}
+          />
+          <input
+            className="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="GPA (optional)"
+            value={e.gpa ?? ""}
+            onChange={(ev) => {
+              const ed = [...data.education];
+              ed[i].gpa = ev.target.value;
               update({ education: ed });
             }}
           />

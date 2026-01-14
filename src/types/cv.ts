@@ -5,20 +5,26 @@ export interface CVData {
     email: string;
     phone: string;
     location: string;
+    website?: string;
+    linkedin?: string;
   };
   summary: string;
   education: {
     institute: string;
     degree: string;
-    year: string;
+    start?: string;
+    end?: string;
+    location?: string;
+    gpa?: string;
   }[];
   experience: {
     role: string;
     company: string;
-    period: string;
+    start?: string;
+    end?: string;
+    location?: string;
     points: string[];
   }[];
   skills: string[];
-  template: "classic" | "modern";
-  atsMode: boolean;
+  certifications?: string[];
 }
