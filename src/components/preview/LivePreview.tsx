@@ -6,8 +6,15 @@ import ATSTemplate from "../templates/ATSTemplate";
 export default function LivePreview() {
   const { data } = useCVStore();
 
-  if (data.atsMode) return <ATSTemplate data={data} />;
-  return data.template === "classic"
-    ? <ClassicTemplate data={data} />
-    : <ModernTemplate data={data} />;
+  return (
+    <div className="prose max-w-none">
+      {data.atsMode ? (
+        <ATSTemplate data={data} />
+      ) : data.template === "classic" ? (
+        <ClassicTemplate data={data} />
+      ) : (
+        <ModernTemplate data={data} />
+      )}
+    </div>
+  );
 }
